@@ -1,0 +1,51 @@
+version: "3"
+
+networks:
+  loki:
+
+services:
+  loki:
+    image: grafana/loki:2.4.1
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/etc/rules/rules.yaml:/etc/loki/rules/rules.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  api:
+    image: node:10.15.3-alpine
+    container_name: Biodata-node
+    build: .
+    ports:
+      - 3030:3030
+    environment:
+     - NODE_ENV=local
+     - NODE_PORT=3030
+    volumes:
+      - .:/usr/src
+    command: npm run start
+    networks: 
+      - loki
+      
+  promtail:
+    image: grafana/promtail:2.4.1
+    volumes:
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER=agrosbiodata@gmail.com
+      - GF_SMTP_PASSWORD=William1997
+      - GF_SMTP_FROM_ADDRESS=agrosbiodata@gmail.com
+    networks:
+      - loki
