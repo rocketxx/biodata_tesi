@@ -1,0 +1,16 @@
+[
+  {
+    "id_arduino": "arduino1",
+    "id_sensor": "30abc",
+    "sensors_type": "temperatura",
+    "sensor_value":"10",
+    "date": 1648396974076
+  },
+  {
+    "id_arduino": "arduino2",
+    "id_sensor": "40abc",
+    "sensors_type": "soil",
+    "sensor_value":"50",
+    "date": 1648396974076
+  }
+]

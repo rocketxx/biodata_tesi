@@ -1,22 +1,28 @@
 {
-  "name": "biodata",
+  "name": "nodejselastic",
   "version": "1.0.0",
-  "description": "Tesi",
+  "description": "This is the repository for [**Fulltext search with Node.js and ElasticSearch on Docker**](https://micheleriva.medium.com/full-text-search-with-node-js-and-elasticsearch-on-docker-edcea23612fd)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "pm2-runtime start ./src/main.js --name node_app",
+    "stop": "pm2-runtime stop node_app "
   },
-  "author": "William Ragusa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micheleriva/fulltext-search-with-node-and-elasticsearch-on-docker.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.26.0",
-    "express": "^4.17.3",
-    "node-telegram-bot-api": "^0.56.0",
-    "nodemailer": "^6.7.3",
-    "telegraf": "^4.7.0",
-    "winston-loki": "^6.0.5"
+  "bugs": {
+    "url": "https://github.com/micheleriva/fulltext-search-with-node-and-elasticsearch-on-docker/issues"
   },
-  "devDependencies": {
-    "typescript": "^4.6.2"
+  "homepage": "https://github.com/micheleriva/fulltext-search-with-node-and-elasticsearch-on-docker#readme",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.17.0",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.3"
   }
 }

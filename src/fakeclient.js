@@ -1,27 +1,26 @@
 
     const { header } = require("express/lib/request");
     const http = require("http")
-function sendata(value,ts,source,job,host)
+function sendata(id_arduino,id_sensor,sensor_type,sensor_value,date,name_field,location)
 {
-    // var value = 'test'
-    // var ts = '2022-03-15T08:14:15Z'
-    // var source ='william'
-    // var job = 'williamJob'
-    // var host = 'williamHost'
-
-    var labels = get_labels(source,job,host)
-
-    var obj = { "streams": [ { "labels": `${labels}`, "entries": [{ "ts": `${ts}`, "line":`${value}`}] } ] }
-
+    var obj =   {
+        "id_arduino": `${id_arduino}`,
+        "id_sensor": `${id_sensor}`,
+        "sensors_type": `${sensor_type}`,
+        "sensor_value":`${sensor_value}`,
+        "date": `${date}`,
+        "name_field": `${name_field}`,
+        "location":  `${location}`
+      }
     console.log(obj)
 //da problemi loki in bbase al ts, controllare bene 
 
     const data = JSON.stringify(obj)
 
     const options = {
-        hostname:'loki', 
-        port: 3100,
-        path: '/api/prom/push',
+        hostname:'localhost', 
+        port: 3000,
+        path: '/biodata/new',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -50,13 +49,6 @@ function sendata(value,ts,source,job,host)
       req.end();
 
 }
-      function get_labels(source_,job_,host_)
-      {
-        var tmp = '{source="api",job="simplejob", host="simplehost"}'
-        tmp = tmp.replace("api",source_)
-        tmp = tmp.replace("simplejob",job_)
-        tmp = tmp.replace("simplehost",host_)
-        return tmp
-      }
+
 
       module.exports.sendata = sendata;

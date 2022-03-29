@@ -1,0 +1,18 @@
+*********************************************
+ricevere json da agros: 
+api esposta, li invia ad uno script, in questo script si importano le funzioni:
+sendata da fakeclient.js e sendNewValue da randomdata.js
+lo split da vecchio progetto 
+*********************************************
+
+***********************query lucene:**********************************************
+      
+      {
+  "query":{
+    "terms" : {"sensor_type" : ["temperature"]}
+  },
+  "fields" : ["sensor_value"] 
+}
+
+****************is above 10 for the last 5 minutes*******elastisearch query********
+
