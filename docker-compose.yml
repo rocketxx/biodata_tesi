@@ -25,15 +25,13 @@ services:
 
   elasticsearch:
     container_name: tqd-elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.2
     volumes:
       - esdata:/usr/share/elasticsearch/data
     environment:
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      #- "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
-    logging:
-      driver: none
     ports:
       - 9300:9300
       - 9200:9200
@@ -43,6 +41,8 @@ services:
       build:
           context: kibana
           dockerfile: Dockerfile
+      environment:
+        - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       container_name: kibana
       ports:
           - 5601:5601
