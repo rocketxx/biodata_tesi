@@ -32,6 +32,7 @@ services:
       - bootstrap.memory_lock=true
       #- "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
+      - xpack.security.enrollment.enabled:true
     ports:
       - 9300:9300
       - 9200:9200
@@ -43,6 +44,8 @@ services:
           dockerfile: Dockerfile
       environment:
         - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
       container_name: kibana
       ports:
           - 5601:5601
